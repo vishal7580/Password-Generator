@@ -38,26 +38,29 @@
 }
 .slider input::-webkit-slider-runnable-track{
     background: var(--vb-violet);
-    outline: none;
     border-radius: 15px;
-    transition: all ease;
-    height: 10px;
+    height: 12px;
 }
 
 .slider input::-webkit-slider-thumb{
     -webkit-appearance: none;
     appearance: none;
-    height: 30px;
-    width: 30px;
+    height: 33px;
+    width: 33px;
     background-color: var(--vb-yellow);
     border-radius: 50%;
     margin-top: -10px;
     transition: all 100ms;
 }
+/* .slider input:focus{
+    outline: 3px solid var(--vb-yellow);
+
+} */
 
 .slider input::-webkit-slider-thumb:hover{
     background-color: black;
-    box-shadow: 0 0 10px 4px var(--vb-yellow);
+    box-shadow: 0 0 10px 6px var(--vb-yellow);
+    outline: 2px solid var(--vb-yellow);
 }
 
 .wrapper{
@@ -83,6 +86,7 @@ h1{
     opacity: 0.75;
     letter-spacing: 2px;
     padding-bottom: 0.35rem;
+    text-align: center;
 }
 
 .display-container{
@@ -121,7 +125,7 @@ h1{
     width: 100%;
     background-color: var(--dk-violet);
     color: white;
-    border-bottom: 0.35rem solid var(--lt-violet);
+    border-bottom:0.35rem solid var(--lt-violet2);
     border-radius: 1rem;
     padding:1.75rem;
     display: flex;
@@ -153,7 +157,7 @@ h1{
 .strength-group div{
     width: 25px;
     height: 25px;   
-    background-color: yellow;
+    background-color: grey;
     border-radius: 50%;
     box-shadow: 0 0 10px;
 }
@@ -185,7 +189,6 @@ h1{
 .check div label{
     font-size: 1.25rem;
 }
-
 .generateButton{
     color: var(--vb-yellow);
     background: var(--vb-violet);
@@ -196,6 +199,7 @@ h1{
     border-bottom: 0.35rem solid var(--vb-yellow);
     padding:1rem 0;
     letter-spacing: 1px;
+    cursor: pointer;
 }
 .tooltip{ 
    font-size: 1.25rem;
@@ -208,7 +212,7 @@ h1{
    top: -35px;
    transform: scale(0);
    transform-origin: bottom;
-   transition: all 200ms ease-in-out;
+   transition: transform 200ms ease-in-out;
 }
 .active{
     transform:scale(1);
