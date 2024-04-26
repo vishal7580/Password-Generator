@@ -21,10 +21,12 @@ handleSlider();
 function handleSlider(){
     inputSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
+    
 }
 inputSlider.addEventListener("input", (sliderValue)=>{
-    passwordLength = sliderValue.target.value;
+    passwordLength = sliderValue.target.value;    
     handleSlider();
+    
 });
 
 function generateRndInt(min,max){
@@ -77,7 +79,7 @@ async function copyContent(){
     setTimeout(() => {
         copyMsg.classList.remove("active");
 
-    }, 3000);
+    }, 2000);
 }
 
 copyBtn.addEventListener("click", ()=>{
@@ -110,7 +112,7 @@ generatePss.addEventListener('click', ()=>{
         handleSlider();
     }
     password = "";
-    let arrOfFunc = [];
+    const arrOfFunc = [];
 
     if(upperCheck.checked)
         arrOfFunc.push(generateUpperCase);
@@ -121,33 +123,52 @@ generatePss.addEventListener('click', ()=>{
     if(symbolCheck.checked)
         arrOfFunc.push(generateSymbols);
 
-    let count = checkCount;
-    let passCount = passwordLength;
     // COMPULSORY ADDITION
     for(let i=0; i<arrOfFunc.length; i++){
         password += arrOfFunc[i]();
-        passCount--;
     }
 
-    if(passCount === 0){
-        displayPss.value = password;
-        return;
+    //FOR REMAINING PASSWORD  
+    for (let i = 0; i <passwordLength-arrOfFunc.length; i++) {
+        let randomIndex = generateRndInt(0,arrOfFunc.length);
+        password += arrOfFunc[randomIndex]();
     }
 
-    //FOR REMAINING PASSWORD LENGTH 
-    for (let i = 0; i < arrOfFunc.length; i++) {
-        let random = generateRndInt(1,passCount+1);
-        count--;
-        if(count === 0)
-            random = passCount;
-        for(let j=0; j<random; j++){
-            password += arrOfFunc[i]();
-        }
-        passCount = passCount - random;
-    }
-
-    // password = shufflePassword(Array.from(password))
+    password = shufflePassword(Array.from(password))
     displayPss.value = password;
+
+    calcStrength();
 })
 
-// CALCULATE STRENGTH FUNCITON REMAINING>>>>
+function calcStrength(){
+    if(passwordLength >= 10){
+        if(checkCount >= 3)
+            indicator.style.backgroundColor = '#00FF00';
+
+        else if(checkCount == 2){
+            if(passwordLength > 15)
+                indicator.style.backgroundColor = '#00FF00';
+            else
+                indicator.style.backgroundColor = '#FFFF00';
+        }
+        else{
+            if(passwordLength > 15)
+                indicator.style.backgroundColor = '#FFFF00';
+            else
+                indicator.style.backgroundColor = '#FF0000';
+        }
+    }
+    else if(passwordLength > 6 && passwordLength < 10){
+        if(checkCount == 4)
+            indicator.style.backgroundColor = '#00FF00';
+        else if(checkCount == 3)
+            indicator.style.backgroundColor = '#FFFF00';
+        else
+            indicator.style.backgroundColor = '#FF0000';
+    }
+    else{
+        indicator.style.backgroundColor = '#FF0000';
+    }
+
+}
+
